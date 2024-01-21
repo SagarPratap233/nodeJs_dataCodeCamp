@@ -12,4 +12,3 @@ const details = {
 
 }
 console.log(details);
-
