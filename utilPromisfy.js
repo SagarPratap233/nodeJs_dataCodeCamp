@@ -1,6 +1,4 @@
 const {readFile, writeFile} = require('fs');
-const { reject, first } = require('lodash');
-const { resolve } = require('path');
 const util = require('util');
 
 const readFilePromised = util.promisify(readFile);
