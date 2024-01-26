@@ -1,25 +1,46 @@
-const http = require('http');
-// console.log(http);
-const server = http.createServer((req, res) => {
-    // res.write('hello kuch aaya kya?');
-    // res.end();
+const {readFile, writeFile} = require('fs').promises;
 
-    if(req.url==='/')
-    {
-        res.end("Welcome this is the home page");
+const some =  async () => {
+    try{
+       let first = await readFile('./content/first.txt', "utf-8")
+       let second = await readFile('./content/second.txt', "utf-8")
+       await writeFile("./content/writtenWithPromises.txt", "Legendary", "utf8")
+       let third = await readFile('./content/writtenWithPromises.txt', "utf-8")
+       console.log(first, second, third);
     }
-    if(req.url==='/about')
+    catch(error)
     {
-        res.end("What do you wanna, bitch!!");
+        console.log(error);
     }
-    res.end(`
-    <h1>Ops!</h1>
-    <p>The page you are looking for does not exists</p>
-    <a href = '/'> please click the link to do to homepage</a>
-    `)
+}
+some();
 
-});
+// readFile('./content/first.txt', 'utf8', (err, data )=>{
+//     if(err)
+//     {
+//         return
+//     } else 
+//     {
+//         console.log(data);
+//     }
+// })
 
-server.listen(5000, () => {
-    console.log('Server is listening on port 5000');
-});
+// getText = (path) => {
+//     return new Promise ((resolve, reject) => {
+//         readFile(path, 'utf8', (err, data)=> {
+//             if(err) {
+//                 reject(err);
+//             } else {  
+//                 resolve(data);
+//             }
+//         })
+//     })
+
+// };
+// // this is one way to do that
+
+// getText('./content/first.txt')
+//     .then((result)=> console.log(result))
+//     .catch((err)=>console.log(err));
+
+// we can also use async and 
