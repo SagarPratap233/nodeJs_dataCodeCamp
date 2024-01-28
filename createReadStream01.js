@@ -12,7 +12,7 @@
 const {createReadStream} = require('fs');
 const { setDefaultHighWaterMark } = require('stream');
 
-const readStream = createReadStream("../content/big.txt", {highWaterMark: 9000, encoding : 'utf8'});
+const readStream = createReadStream("./content/big.txt", {highWaterMark: 9000, encoding : 'utf8'});
 
 // default buffer size : 64kb
 // we can change buffer size 
