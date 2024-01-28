@@ -1,28 +1,19 @@
-
-// write a file with a lot of text 
-// const {writeFileSync} = require('fs');
-
-
-// for(let i = 0; i<100000; i++)
-// {
-//     writeFileSync('./content/big.txt', `Some Words ${i}`, {flag:'a'});
-// }
+const http = require('http')
+const {ReadStream} = require('fs')
+const fs = require('fs')
 
 
-const {createReadStream} = require('fs');
-const { setDefaultHighWaterMark } = require('stream');
+const server = http.createServer((req, res) => {
+    // const text = readFileSync('./content/big.txt', "utf8")
+    // res.end(text);
+    const fileStream  = fs.createReadStream('./content/big.txt', 'utf8');
 
-const readStream = createReadStream("../content/big.txt", {highWaterMark: 9000, encoding : 'utf8'});
+    fileStream.on('open', ()=>{
+        fileStream.pipe(res)
+    })
+} 
+);
 
-// default buffer size : 64kb
-// we can change buffer size 
-// we can also add encodingf as well 
 
-readStream.on('data', (result)=> {
-    console.log(result);
-})
 
-readStream.on('error', (err)=> {
-    console.log(err);
-})
-
+server.listen(5000)
